@@ -15,7 +15,7 @@ setxkbmap -layout "us,gr" -option  "grp:alt_shift_toggle"
 
 xsetroot -cursor_name left_ptr &
 
-run nm-applet &
+#run nm-applet &
 picom --config $HOME/.config/qtile/picom.conf&
 run pamac-tray &
 run xfce4-power-manager &
@@ -29,6 +29,6 @@ picom --config $HOME/.config/qtile/picom.conf &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 nitrogen --restore &
 run xfce4-clipman &
-run ffplay -nodisp -autoexit  $HOME/Music/stereo/desktop-logoff.oga
-ckb-next  & 
+run ffplay -nodisp -autoexit  $HOME/Music/login.wav
+#ckb-next  & 
 		

@@ -16,13 +16,14 @@ import subprocess
 from libqtile import qtile
 from typing import List  # noqa: F401
 from libqtile import layout, bar, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule 
 from libqtile.widget import Spacer
-from libqtile.command import lazy
+#from libqtile.command import lazy
+from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile import extension
 from typing import List  # noqa: F401
-from spotify import Spotify
+#from spotify import spotify
 #from qtile_extras import widget ##global  menu 
 
 mod = "mod4"
@@ -55,33 +56,32 @@ keys = [
 
     Key([mod], "a", lazy.spawn('xfce4-appfinder')),
     Key([mod], "b", lazy.hide_show_bar()),
-   # Key([mod], "d", lazy.spawn("")),
-    Key([mod], "e", lazy.spawn('thunar')),
+    Key([mod], "d", lazy.spawn('discord'),lazy.group["9"].toscreen()),
+    Key([mod], "e", lazy.spawn('thunar'),lazy.group["6"].toscreen()),
     Key([mod], "c", lazy.spawn('caprine')),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
   # Key([mod], "m", lazy.spawn('')),
     Key([mod], "p", lazy.spawn('pamac-manager')),
     Key([mod], "q", lazy.spawn(home + '/.config/rofi-quicklinks/quicklinks.sh')),
-    Key([mod], "r", lazy.spawn(home + '/.config/rofi/web.sh')),
     Key([mod], "t", lazy.spawn('xfce4-terminal')),
     Key([mod], "v", lazy.spawn('pavucontrol')),
-    Key([mod], "w", lazy.spawn('brave')),
+    Key([mod], "w", lazy.spawn('brave'),lazy.group["1"].toscreen()),
   # Key([mod], "x", lazy.spawn('')),
     Key([mod], "x", lazy.spawn(home + '/.config/rofipower/rofipower.sh')),
     Key([mod], "Escape", lazy.spawn('xkill')),
     Key([mod], "Return", lazy.spawn("alacritty")),
     Key([mod], "KP_Enter", lazy.spawn('alacritty')),
     Key([mod], "F1", lazy.spawn('brave')),
-    Key([mod], "F2", lazy.spawn('thunderbird')),
+    Key([mod], "F2", lazy.spawn('thunderbird'),lazy.group["10"].toscreen()),
     Key([mod], "F3", lazy.spawn('inkscape')),
     Key([mod], "F4", lazy.spawn('gimp')),
     Key([mod], "F5", lazy.spawn('geany')),
     Key([mod], "F6", lazy.spawn('vlc --video-on-top')),
     Key([mod], "F7", lazy.spawn('rhythmbox')),                             
-    Key([mod], "F8", lazy.spawn("spotify")),
-    Key([mod], "F9", lazy.spawn('rofi -show window -show-icons')),
-    Key([mod], "F10",lazy.spawn('rofi -show drun -show-icons')),
-    Key([mod], "F11",lazy.spawn('rofi -show run')),
+    Key([mod], "F8", lazy.spawn("spotify"),lazy.group["10"].toscreen()),
+    Key([mod], "F9", lazy.spawn(home + '/.config/rofi/rofi-sound2.sh')),
+    #Key([mod], "F10",lazy.spawn('rofi -show drun -show-icons')),
+    #Key([mod], "F11",lazy.spawn('rofi -show run')),
     Key([mod], "F12",lazy.spawn(' xfce4-terminal --drop-down')),
     # SCREENSHOTS
     Key([mod], "Print", lazy.spawn('xfce4-screenshooter')),
@@ -92,6 +92,7 @@ keys = [
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod, "shift"], "x", lazy.shutdown()),
     Key([mod, "shift"], "Return", lazy.spawn('thunar')),
+    
 #   Key([mod, "shift"], "d", lazy.spawn('morc_menu')),
      
  # SUPER + CONTROL KEYS
@@ -106,14 +107,19 @@ keys = [
   # Key(["mod1", "control"], "')),
   # Key(["mod1", "control"], "')),
   # Key(["mod1", "control"], "a", lazy.spawn('')),
-   Key(["mod1", "control"],"b", lazy.spawn('thunar')),
+  # Key(["mod1", "control"],"b", lazy.spawn('thunar')),
  
-   Key(["mod1", "control"],"f", lazy.spawn('firefox')),
+   Key(["mod1", "control"],"f", lazy.spawn('firefox'),lazy.group["2"].toscreen()),
    Key(["mod1", "control"],"g", lazy.spawn("setxkbmap gr")),
   Key(["mod1", "control"],"i", lazy.spawn('nitrogen')),
   # Key(["mod1", "control"], "k", lazy.spawn('')),
-  # Key(["mod1", "control"], "l", lazy.spawn('')),
-   Key(["mod1", "control"],"m", lazy.spawn('xfce4-settings-manager')),
+  # Key(["mod1", "control"], "l", lazy.spawn('thunar')),
+    Key([mod], "c", lazy.spawn('caprine')),
+    Key([mod], "f", lazy.window.toggle_fullscreen()),
+  # Key([mod], "m", lazy.spawn('')),
+    Key([mod], "p", lazy.spawn('pamac-manager')),
+    Key([mod], "q", lazy.spawn(home + '/.config/rofi-quicklinks/quicklinks.sh')),
+    Key([mod], "r", lazy.sawn('xfce4-settings-manager')),
    
    Key(["mod1", "control"],"o", lazy.spawn(home + '/.config/qtile/scripts/picom-toggle.sh')),
    #Key(["mod1", "control"], "p", lazy.widget['notify'].prev()),
@@ -129,10 +135,7 @@ keys = [
      
     Key(["mod1"], "c", lazy.spawn('xfce4-terminal -e cava ')),
    # Key(["mod1"], "k", lazy.spawn('')),
-   # Key(["mod1"], "f", lazy.spawn('variety -f')),
-    Key(["mod1"], "h", lazy.spawn('xfce4-terminal -e htop')),
-   # Key(["mod1"], "g", lazy.spawn('termite -e gtop')),
-   # Key(["mod1"], "n", lazy.spawn('variety -n')),
+   # Key(["mod1"], "f", lazy.spawn('vfrom spotify import spotifyriety -n')),
    # Key(["mod1"], "p", lazy.spawn('variety -p')),
    # Key(["mod1"], "t", lazy.spawn('variety -t')),
    # Key(["mod1"], "Up", lazy.spawn('variety --pause')),
@@ -146,7 +149,7 @@ keys = [
    #Key(["mod1"], "F5", lazy.spawn('balena-etcher-electron')),
     Key(["mod1"], "Shift_R" , lazy.widget['keyboardlayout'].next_keyboard()),
    #Key(["mod1"], "Tab", lazy.spawn('rofi -show window -show-icons')),
-    Key(["mod1"], "Tab", lazy.spawn('rofi -combi-modi window,drun -show-icons -show combi -modi combi')),
+    Key(["mod1"], "Tab", lazy.spawn(home + '/.config/rofi/rofi-sound1.sh')),
    
    
 
@@ -341,7 +344,6 @@ for i in groups:
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
     ])
 
-
 def init_layout_theme():
     return {"margin":5,
             "border_width":2,
@@ -373,7 +375,7 @@ layouts = [
                 inactive_fg = "#f8f8f2	",
                 padding_y = 5,
                 section_top = 10,
-                panel_width = 260,
+                panel_width = 120,
                 **layout_theme
                 ),
     layout.Stack(
@@ -423,8 +425,18 @@ def init_widgets_list():
               widget.Image(
                        filename = "~/.config/qtile/icons/python.png",
                        scale = "False",
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('rofi -show drun -show-icons')}
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(home + '/.config/rofi/rofi-sound1.sh')}
                        ),
+              widget.Image(
+                       filename = "~/.config/qtile/icons/streamee.png",
+                       scale = "False",
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(home + '/.config/qtile/scripts/streamee.sh')}
+                       ),
+             widget.Image(
+                       filename = "~/.config/qtile/icons/chatgpt-icon.png",
+                       scale = "False",
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(home + '/.config/qtile/scripts/chatgpt.sh')}
+                       ),        
                 widget.GroupBox(
                	            font="Ubuntu Bold",
                             fontsize = 10,
@@ -438,7 +450,7 @@ def init_widgets_list():
                             inactive = colors[8],
                             rounded = False,
                             highlight_method = "text",
-                            this_current_screen_border = colors[8],
+                            this_current_screen_border = colors[1],
                             foreground = colors[2],
                             background = colors[0]
                              ),
@@ -472,9 +484,8 @@ def init_widgets_list():
                             padding = 0,
                             fontsize=14
                                 ),
-                # widget.GlobalMenu(
-                #            background= colors[0],
-                #            decorations=[]	,
+                # widget.Global  foreground = colors[2],
+               #             background = colors[0]corations=[]	,
                 #            fmt='{}'	,
                 #            font="Ubuntu Bold",	
                 #            fontshadow=None,	
@@ -507,12 +518,22 @@ def init_widgets_list():
                             foreground = colors[4],
                             background = colors[0],
                               ),
-                     Spotify(    
-                            font="Ubuntu Bold",
-                            fontsize = 10,
-                            foreground = colors[4],
-                            background = colors[0]
-                            ),
+                    #  Spotify(    
+                    #         font="Ubuntu Bold",
+                    #         fontsize = 10,
+                    #         foreground = colors[4],
+                    #         background = colors[0]
+                    #         ),
+                 widget.Mpris2(
+                             font="Ubuntu Bold",
+                             fontsize = 10,
+                             name='spotify',
+                             foreground = colors[3],
+                             objname="org.mpris.MediaPlayer2.spotify",
+                             display_metadata=['xesam:title', 'xesam:artist'],
+                             stop_pause_text = 'Player paused',
+                             scroll_interval = 0.3,
+                                ),
                 # widget.TextBox(
                 #             font="Ubuntu Bold",
                 #             text=" 🎵 ",
@@ -562,7 +583,7 @@ def init_widgets_list():
                             units='m',
                             markup = True ,
                             xml = False ,
-                        #   mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('alacritty -e curl -s wttr.in/{galatsi}?format=3')},
+                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(home + '/.config/qtile/scripts/wttr.sh')},
                            foreground=colors[6],
                            background=colors[0],
                            user_agent = 'voice49',
@@ -608,7 +629,8 @@ def init_widgets_list():
                             text="⏰",
                             foreground=colors[3],
                             background=colors[0],
-                            padding = 0,
+                            padding = 1,
+                             mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(home + '/.config/qtile/scripts/.sh')},
                             fontsize=10
                             ),
                 widget.Clock(
@@ -642,7 +664,7 @@ def init_widgets_screen1():
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[20:22]
+    del widgets_screen2[20:24]
     return widgets_screen2
 
 widgets_screen1 = init_widgets_screen1()
@@ -665,48 +687,6 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []
-
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
-# BEGIN
-
-#########################################################
-################ assgin apps to groups ##################
-#########################################################
-#  @hook.subscribe.client_new
-#  def assign_app_group(client):
-#      d = {}
-#     #####################################################################################
-#     ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
-#     #####################################################################################
-# d[group_names[0]] = ["Navigator", "Firefox", "Vivaldi-stable", "Vivaldi-snapshot", "Chromium", "Google-chrome", "Brave", "Brave-browser",
-#           "navigator", "firefox", "vivaldi-stable", "vivaldi-snapshot", "chromium", "google-chrome", "brave", "brave-browser", ]
-#    d[group_names[1]] = [ "Atom", "Subl", "Geany", "Brackets", "Code-oss", "Code", "TelegramDesktop", "Discord",
-#               "atom", "subl", "geany", "brackets", "code-oss", "code", "telegramDesktop", "discord", ]
-#    d[group_names[2]] = ["Inkscape", "Nomacs", "Ristretto", "Nitrogen", "Feh",
-#              "inkscape", "nomacs", "ristretto", "nitrogen", "feh", ]
-#    d[group_names[3]] = ["Gimp", "gimp" ]
-#    d[group_names[4]] = ["Meld", "meld", "org.gnome.meld" "org.gnome.Meld" ]
-#    d[group_names[5]] = ["Vlc","vlc", "Mpv", "mpv" ]
-#    d[group_names[6]] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer",
-#              "virtualbox manager", "virtualbox machine", "vmplayer", ]
-#    d[group_names[7]] = ["Thunar", "Nemo", "Caja", "Nautilus", "org.gnome.Nautilus", "Pcmanfm", "Pcmanfm-qt",
-#              "thunar", "nemo", "caja", "nautilus", "org.gnome.nautilus", "pcmanfm", "pcmanfm-qt", ]
-#    d[group_names[8]] = ["Evolution", "Geary", "Mail", "Thunderbird",
-#              "evolution", "geary", "mail", "thunderbird" ]
-#     d[group_names[9]] = ["Spotify", "Pragha", "Clementine", "Deadbeef", "Audacious",
-#               "spotify", "pragha", "clementine", "deadbeef", "audacious" ]
-#     ######################################################################################
-#
-# wm_class = client.window.get_wm_class()[0]
-
-#     for i in range(len(d)):
-#         if wm_class in list(d.values())[i]:
-#             group = list(d.keys())[i]
-#             client.togroup(group)
-#             client.group.cmd_toscreen(toggle=False)
-
-# END
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
 
 
 
